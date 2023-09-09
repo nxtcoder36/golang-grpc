@@ -1,0 +1,24 @@
+Step 1: Creating Proto File
+Create one proto file name with greeeing.proto
+
+Step 2: Converting Proto File to Go File
+Now We need to convert this proto file into a Go file
+protoc <proto-file-path> --go_out=<output-file-path> --go-grpc_out=<output-file-path>
+// protoc proto/greeting.proto --go_out=proto/ --go-grpc_out=proto/
+OR
+protoc *.proto --go_out=./ --go-grpc_out=./
+// protoc *.proto --go_out=./ --go-grpc_out=./
+
+After executing the above command, we can see two files are generated in pb directory
+In greeting_grpc.pb.go, one interface is auto-generated
+
+Step 3: Inheriting The gRPC Interface
+type GreetingServiceServer interface {
+	Greeting(context.Context, *GreetingServiceRequest) (*GreetingServiceReply, error)
+}
+Now we need to inherit and implement the above interface.
+
+Step 4: Creating the Client Call Service
+After the server starts, we need to write the client to call the greeting method.
+
+Ref: https://github.com/DekivadiyaKishan/golang-grpc
